@@ -1,4 +1,4 @@
-import weather from "./weather/reducers";
+import weather from "./weather/reducer";
 
 export default {
     weather
