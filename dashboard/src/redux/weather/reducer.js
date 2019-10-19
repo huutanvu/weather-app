@@ -1,14 +1,25 @@
 import actions from "./actions";
 
 const initialState = {
-    location: null
+    userLocation: null,
+    location: null,
+    currentWeather: null,
+    weatherForecast: null,
+    lastUpdated: null
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.SET_LOCATION:
+        case actions.SET_USER_LOCATION:
             return Object.assign({}, state, {
-                location: action.location
+                userLocation: action.userLocation
+            })
+        case actions.SET_WEATHER:
+            return Object.assign({}, state, {
+                currentWeather: action.currentWeather,
+                weatherForecast: action.weatherForecast,
+                location: action.location,
+                lastUpdated: Date.now()
             })
         default:
             return state;

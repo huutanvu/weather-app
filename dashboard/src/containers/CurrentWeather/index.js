@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setLocation } from "../../redux/weather/actions";
-import LocationService from "../../helpers/locationService";
+import { setUserLocation, setLocation } from "../../redux/weather/actions";
+import locationService from "../../helpers/locationService";
 
 class CurrentWeather extends Component {
     state = {
@@ -9,26 +9,34 @@ class CurrentWeather extends Component {
     }
 
     componentDidMount = () => {
-        const locationService = new LocationService();
         locationService.getCurrentPosition().then((data) => {
             this.setState({
                 loading: false
             })
-            this.props.setLocation(data.coords.longitude, data.coords.latitude);
-            console.log(this.props.weather)
+            this.props.setLocation({ lon: data.coords.longitude, lat: data.coords.latitude });
+            this.props.setUserLocation({ lon: data.coords.longitude, lat: data.coords.latitude });
         }).catch(err => {
             // User denied GeoLocation
             this.setState({
                 loading: false
             })
+            // set Default location to Frankfurt
+            this.props.setLocation({ lon: 8.682127, lat: 50.110924 });
         })
 
+    }
+
+    onButtonClick = () => {
+        this.props.setLocation({ lon: 8.682127, lat: 50.110924 });
     }
 
     render = () => {
         return (
             this.state.loading ? null :
-                <div><h1>Hello World!</h1></div>
+                <div>
+                    <h1>Hello World!</h1>
+                    <button onClick={this.onButtonClick}>Update Location</button>
+                </div>
         )
     }
 }
@@ -39,4 +47,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { setLocation })(CurrentWeather);
+export default connect(mapStateToProps, { setUserLocation, setLocation })(CurrentWeather);

@@ -3,7 +3,7 @@ import axios from 'axios';
 // Does not support http calls
 // const IP_API_URL = "http://ip-api.com/json/"; 
 
-export default class LocationService {
+class LocationService {
 
     getCurrentPosition = () => {
         if (navigator.geolocation) {
@@ -24,3 +24,5 @@ export default class LocationService {
     // }
 
 }
+
+export default new LocationService();

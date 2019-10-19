@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-export default class WeatherService {
+class WeatherService {
 
     getCurrentWeatherByCity = async (cityName) => {
         const currentWeatherUrl = `${BACKEND_URL}/current`;
@@ -49,3 +49,6 @@ export default class WeatherService {
     }
 
 }
+
+
+export default new WeatherService();
