@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 import { store, history } from './redux/store';
+import WeatherService from "./helpers/weatherService"
 
 const App = () => {
   return (

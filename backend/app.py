@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import os
 import requests
 
@@ -13,6 +14,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object('config.settings')
     app.config.from_pyfile('settings.py', silent=True)
+    CORS(app)
 
     @app.route('/', methods=['GET'])
     def health_check():
@@ -42,5 +44,5 @@ def create_app():
             return jsonify({"error": "Cannot get weather data"}), response.status_code
         else:
             return jsonify(response.json()), 200
-
+    
     return app
