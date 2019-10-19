@@ -32,4 +32,15 @@ def create_app():
         else:
             return jsonify(response.json()), 200
 
+    @app.route('/forecast', methods=['GET'])
+    def get_weather_forecast():
+        forecast_api = f"{WEATHER_API}/forecast"
+        params = {"APPID": WEATHER_API_KEY,
+                  "q": request.args.get('city')}
+        response = requests.request("GET", forecast_api, params=params)
+        if not response.status_code == 200:
+            return jsonify({"error": "Cannot get weather data"}), response.status_code
+        else:
+            return jsonify(response.json()), 200
+
     return app
