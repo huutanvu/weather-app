@@ -34,7 +34,7 @@ class CurrentWeather extends Component {
         return (
             this.state.loading ? null :
                 <div>
-                    <h1>Hello World!</h1>
+                    <h1>Current Weather</h1>
                     <button onClick={this.onButtonClick}>Update Location</button>
                 </div>
         )

@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { Layout, Menu, Card } from "antd";
+import { Layout, Menu, Card, Icon } from "antd";
 import DashboardWrapper from "./dashboard.style";
 import CardWrapper from "../../components/Card/card.style";
 import { Row, Col } from "antd";
+import { Route, Link } from "react-router-dom";
+import CurrentWeather from "../CurrentWeather";
+import TripPlanning from "../TripPlanning";
 
 const { Header, Content } = Layout;
 const { Meta } = Card;
@@ -10,97 +13,47 @@ const { Meta } = Card;
 
 
 class Dashboard extends Component {
+    state = {
+        currentPath: "current"
+    }
+
+    componentDidMount = () => {
+        const currentPath = this.props.location.pathname.split("/")[1]
+        if (currentPath === "") {
+            this.setState({ currentPath: "current" })
+        }
+        else {
+            this.setState({ currentPath: currentPath })
+        }
+    }
+
     render = () => {
         return (
             <DashboardWrapper>
                 <Layout className="mainLayout">
                     <Header className="mainHeader">
                         <div className="logo">
-                            <img src={process.env.PUBLIC_URL + '/img/logo.png'} />
+                            <a href="/">
+                                <img src={process.env.PUBLIC_URL + '/img/logo.png'} />
+                            </a>
                         </div>
-                        <Menu className="mainMenu" mode="horizontal" theme="dark">
-                            <Menu.Item key="current">Current Weather</Menu.Item>
-                            <Menu.Item key="trip">Trip planning</Menu.Item>
+                        <Menu className="mainMenu" mode="horizontal" theme="dark"
+                            selectedKeys={this.state.currentPath || "current"}>
+                            <Menu.Item key="current">
+                                <Icon type="thunderbolt" />
+                                <span>Current Weather</span>
+                                <Link to="/" />
+                            </Menu.Item>
+                            <Menu.Item key="trip">
+                                <Icon type="clock-circle" />
+                                <span>Trip Planning</span>
+                                <Link to="/trip" />
+                            </Menu.Item>
                         </Menu>
                     </Header>
                     <Content className="mainContent">
-                        <Row gutter={16} style={{ marginTop: 40 }}>
-                            <Col span={8}>
-                                <CardWrapper>
-                                    <Card
-                                        className="dashboardCard"
-                                        style={{ width: "100%" }}
-                                    >
-                                        <Meta title="Europe Street beat" description="www.instagram.com" />
-                                    </Card>
-                                </CardWrapper>
-                            </Col>
-                            <Col span={16}>
-                                <CardWrapper>
-                                    <Card
-                                        className="dashboardCard"
-                                        style={{ width: "100%" }}
-                                    >
-                                        <Meta title="Europe Street beat" description="www.instagram.com" />
-                                    </Card>
-                                </CardWrapper>
-                            </Col>
-                        </Row>
-                        <Row gutter={0} style={{ marginTop: 40 }}>
-                            <Col span={4}>
-                                <Card
-                                    className="dashboardCard"
-                                    style={{ width: "100%" }}
-                                >
-                                    <Meta title="Europe Street beat" description="www.instagram.com" />
-                                </Card>
-                            </Col>
-
-                            <Col span={4}>
-                                <Card
-                                    className="dashboardCard"
-                                    style={{ width: "100%" }}
-                                >
-                                    <Meta title="Europe Street beat" description="www.instagram.com" />
-                                </Card>
-                            </Col>
-
-                            <Col span={4}>
-                                <Card
-                                    className="dashboardCard"
-                                    style={{ width: "100%" }}
-                                >
-                                    <Meta title="Europe Street beat" description="www.instagram.com" />
-                                </Card>
-                            </Col>
-
-                            <Col span={4}>
-                                <Card
-                                    className="dashboardCard"
-                                    style={{ width: "100%" }}
-                                >
-                                    <Meta title="Europe Street beat" description="www.instagram.com" />
-                                </Card>
-                            </Col>
-
-                            <Col span={4}>
-                                <Card
-                                    className="dashboardCard"
-                                    style={{ width: "100%" }}
-                                >
-                                    <Meta title="Europe Street beat" description="www.instagram.com" />
-                                </Card>
-                            </Col>
-
-                            <Col span={4}>
-                                <Card
-                                    className="dashboardCard"
-                                    style={{ width: "100%" }}
-                                >
-                                    <Meta title="Europe Street beat" description="www.instagram.com" />
-                                </Card>
-                            </Col>
-                        </Row>
+                        <Route exact path="/" component={CurrentWeather} />
+                        <Route path="/trip" component={TripPlanning} />
                     </Content>
                 </Layout>
             </DashboardWrapper>
