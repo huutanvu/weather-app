@@ -26,7 +26,8 @@ def create_app():
     @app.route('/current', methods=['GET'])
     def get_current_weather():
         current_weather_api = f"{WEATHER_API}/weather"
-        params = {"APPID": WEATHER_API_KEY}
+        params = {"APPID": WEATHER_API_KEY,
+                  "units": "metric"}
         if request.args.get('city') is not None:
             params["q"] = request.args.get('city')
         elif all([request.args.get(coor) is not None for coor in ["lon", "lat"]]):
@@ -43,7 +44,8 @@ def create_app():
     @app.route('/forecast', methods=['GET'])
     def get_weather_forecast():
         forecast_api = f"{WEATHER_API}/forecast"
-        params = {"APPID": WEATHER_API_KEY}
+        params = {"APPID": WEATHER_API_KEY,
+                  "units": "metric"}
         if request.args.get('city') is not None:
             params["q"] = request.args.get('city')
         elif all([request.args.get(coor) is not None for coor in ["lon", "lat"]]):
