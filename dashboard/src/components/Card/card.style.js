@@ -10,6 +10,20 @@ const CardWrapper = styled.div`
         height: 200px;
     }
 
+    .dashboardCard .ant-card-body {
+        
+        margin: 0;
+        position: relative;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .ant-card-meta-title {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
     .weatherIcon {
         max-width: 100%;
     }

@@ -40,7 +40,7 @@ class WeatherCard extends Component {
                             <Row><div className="temperature">{`${Math.round(temp)}°C`}</div></Row>
                             <Row><div className="condition">{`${main}`}</div></Row>
                             <Row><div>{`Humidity: ${humidity}%`}</div></Row>
-                            <Row><div>{`Wind: ${wind.speed} km/h`}</div></Row>
+                            <Row><div>{`Wind: ${Math.round(wind.speed * 3.6)} km/h`}</div></Row>
                         </Col>
                     </Row>
                 </Card>

@@ -4,6 +4,7 @@ import styled from "styled-components";
 const DashboardWrapper = styled.div`
     .mainLayout {
         max-width: 1200px;
+        min-width: 950px;
         height: 100vh;
         margin: 0 auto;
         font-family: 'Nunito', sans-serif;
