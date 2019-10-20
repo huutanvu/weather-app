@@ -40,6 +40,18 @@ const DashboardWrapper = styled.div`
         margin-top: 64px;
         background: #f0f2f5;
     }
+
+    .contentWrapper {
+        margin-top: 30px;
+    }
+
+    .content {        
+        background: #fff;
+        padding: 24px;
+        margin: 0;
+        min-height: 280px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
 `;
 
 export default DashboardWrapper;

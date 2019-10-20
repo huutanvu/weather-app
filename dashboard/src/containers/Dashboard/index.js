@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import { Layout, Menu, Card, Icon } from "antd";
+import { Layout, Menu, Icon } from "antd";
 import DashboardWrapper from "./dashboard.style";
-import CardWrapper from "../../components/Card/card.style";
-import { Row, Col } from "antd";
 import { Route, Link } from "react-router-dom";
 import CurrentWeather from "../CurrentWeather";
 import TripPlanning from "../TripPlanning";
 
 const { Header, Content } = Layout;
-const { Meta } = Card;
-
 
 
 class Dashboard extends Component {
@@ -59,8 +55,12 @@ class Dashboard extends Component {
                         </Menu>
                     </Header>
                     <Content className="mainContent">
-                        <Route exact path="/" component={CurrentWeather} />
-                        <Route path="/trip" component={TripPlanning} />
+                        <div className="contentWrapper">
+                            <div className="content">
+                                <Route exact path="/" component={CurrentWeather} />
+                                <Route path="/trip" component={TripPlanning} />
+                            </div>
+                        </div>
                     </Content>
                 </Layout>
             </DashboardWrapper>
