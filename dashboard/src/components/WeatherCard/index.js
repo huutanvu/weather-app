@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import CardWrapper from "../Card/card.style";
-import { Card, Row, Col } from "antd";
+import { Card, Row, Col, Typography } from "antd";
 
 const { Meta } = Card;
+const { Title } = Typography;
 
 class WeatherCard extends Component {
     componentDidMount = () => {
@@ -26,16 +27,21 @@ class WeatherCard extends Component {
             <CardWrapper>
                 <Card
                     className="dashboardCard"
-                    style={{ width: "100%", height: "150px" }}
+                    style={{ width: "100%" }}
                 >
                     <Meta title={`${city}, ${country}`} />
-                    <Row>
+                    <Row gutter={12} justify="space-around" align="middle" className="weatherInfo">
                         <Col xs={12}>
                             <div className="weatherIcon">
                                 <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={description} />
                             </div>
                         </Col>
-                        <Col xs={12}>{temp}</Col>
+                        <Col xs={12}>
+                            <Row><div className="temperature">{`${Math.round(temp)}°C`}</div></Row>
+                            <Row><div className="condition">{`${main}`}</div></Row>
+                            <Row><div>{`Humidity: ${humidity}%`}</div></Row>
+                            <Row><div>{`Wind: ${wind.speed} km/h`}</div></Row>
+                        </Col>
                     </Row>
                 </Card>
             </CardWrapper>
