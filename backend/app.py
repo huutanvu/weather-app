@@ -37,6 +37,7 @@ def create_app():
             return jsonify({"error": "Bad request"}), 400
         response = requests.request("GET", current_weather_api, params=params)
         if not response.status_code == 200:
+            response.raise_for_status()
             return jsonify({"error": "Cannot get weather data"}), response.status_code
         else:
             return jsonify(response.json()), 200
