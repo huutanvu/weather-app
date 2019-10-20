@@ -1,4 +1,5 @@
 import weatherService from "../../helpers/weatherService";
+import locationService from "../../helpers/locationService";
 
 /*
  * action types
@@ -40,6 +41,9 @@ export const setLocation = (location) => {
             (weather.lastUpdated !== null && ((currentTimestamp - lastUpdated) > 600))) {
             let currentWeather = await weatherService.getCurrentWeatherByCoords(location.lon, location.lat);
             let weatherForecast = await weatherService.getForecastWeatherByCoords(location.lon, location.lat);
+            let { city, country } = await locationService.getReverseLocation(location);
+            location["city"] = city;
+            location["country"] = country;
             dispatch(setWeather(currentWeather, weatherForecast, location))
         }
     }

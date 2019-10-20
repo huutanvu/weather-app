@@ -19,7 +19,6 @@ class LocationService {
 
     getReverseLocation = async (location) => {
         const locationString = `${location.lat},${location.lon}`;
-        console.log(locationString)
         try {
             let response = await axios.get(OPEN_CAGE_DATA_API, {
                 params: {

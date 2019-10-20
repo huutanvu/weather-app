@@ -34,6 +34,7 @@ class WeatherService {
         }
         catch (err) {
             console.error(err);
+            return null;
         }
     }
 
@@ -45,6 +46,7 @@ class WeatherService {
         }
         catch (err) {
             console.error(err);
+            return null;
         }
     }
 

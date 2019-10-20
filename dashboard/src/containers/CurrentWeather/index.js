@@ -4,6 +4,7 @@ import { setUserLocation, setLocation } from "../../redux/weather/actions";
 import locationService from "../../helpers/locationService";
 import CardWrapper from "../../components/Card/card.style";
 import { Row, Col, Card } from "antd";
+import WeatherCard from "../../components/WeatherCard";
 
 const { Meta } = Card;
 
@@ -15,20 +16,21 @@ class CurrentWeather extends Component {
 
     componentDidMount = () => {
         locationService.getCurrentPosition().then((data) => {
-            this.setState({
-                loading: false
-            })
-            this.props.setLocation({ lon: data.coords.longitude, lat: data.coords.latitude });
             this.props.setUserLocation({ lon: data.coords.longitude, lat: data.coords.latitude });
+            this.props.setLocation({ lon: data.coords.longitude, lat: data.coords.latitude }).then(() => {
+                this.setState({
+                    loading: false
+                })
+            });
         }).catch(err => {
             // User denied GeoLocation
-            this.setState({
-                loading: false
-            })
             // set Default location to Frankfurt
-            this.props.setLocation({ lon: 8.682127, lat: 50.110924 });
+            this.props.setLocation({ lon: 8.682127, lat: 50.110924 }).then(() => {
+                this.setState({
+                    loading: false
+                })
+            });
         })
-
     }
 
     onButtonClick = () => {
@@ -43,14 +45,7 @@ class CurrentWeather extends Component {
                     <button onClick={this.onButtonClick}>Update Location</button>
                     <Row gutter={16} style={{ marginTop: 40 }}>
                         <Col span={8}>
-                            <CardWrapper>
-                                <Card
-                                    className="dashboardCard"
-                                    style={{ width: "100%" }}
-                                >
-                                    <Meta title="Europe Street beat" description="www.instagram.com" />
-                                </Card>
-                            </CardWrapper>
+                            <WeatherCard />
                         </Col>
                         <Col span={16}>
                             <CardWrapper>
