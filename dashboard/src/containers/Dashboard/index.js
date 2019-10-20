@@ -1,8 +1,13 @@
 import React, { Component } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Card } from "antd";
 import DashboardWrapper from "./dashboard.style";
+import CardWrapper from "../../components/Card/card.style";
+import { Row, Col } from "antd";
 
 const { Header, Content } = Layout;
+const { Meta } = Card;
+
+
 
 class Dashboard extends Component {
     render = () => {
@@ -19,9 +24,83 @@ class Dashboard extends Component {
                         </Menu>
                     </Header>
                     <Content className="mainContent">
-                        <div>
-                            <h1>Hello World!</h1>
-                        </div>
+                        <Row gutter={16} style={{ marginTop: 40 }}>
+                            <Col span={8}>
+                                <CardWrapper>
+                                    <Card
+                                        className="dashboardCard"
+                                        style={{ width: "100%" }}
+                                    >
+                                        <Meta title="Europe Street beat" description="www.instagram.com" />
+                                    </Card>
+                                </CardWrapper>
+                            </Col>
+                            <Col span={16}>
+                                <CardWrapper>
+                                    <Card
+                                        className="dashboardCard"
+                                        style={{ width: "100%" }}
+                                    >
+                                        <Meta title="Europe Street beat" description="www.instagram.com" />
+                                    </Card>
+                                </CardWrapper>
+                            </Col>
+                        </Row>
+                        <Row gutter={0} style={{ marginTop: 40 }}>
+                            <Col span={4}>
+                                <Card
+                                    className="dashboardCard"
+                                    style={{ width: "100%" }}
+                                >
+                                    <Meta title="Europe Street beat" description="www.instagram.com" />
+                                </Card>
+                            </Col>
+
+                            <Col span={4}>
+                                <Card
+                                    className="dashboardCard"
+                                    style={{ width: "100%" }}
+                                >
+                                    <Meta title="Europe Street beat" description="www.instagram.com" />
+                                </Card>
+                            </Col>
+
+                            <Col span={4}>
+                                <Card
+                                    className="dashboardCard"
+                                    style={{ width: "100%" }}
+                                >
+                                    <Meta title="Europe Street beat" description="www.instagram.com" />
+                                </Card>
+                            </Col>
+
+                            <Col span={4}>
+                                <Card
+                                    className="dashboardCard"
+                                    style={{ width: "100%" }}
+                                >
+                                    <Meta title="Europe Street beat" description="www.instagram.com" />
+                                </Card>
+                            </Col>
+
+                            <Col span={4}>
+                                <Card
+                                    className="dashboardCard"
+                                    style={{ width: "100%" }}
+                                >
+                                    <Meta title="Europe Street beat" description="www.instagram.com" />
+                                </Card>
+                            </Col>
+
+                            <Col span={4}>
+                                <Card
+                                    className="dashboardCard"
+                                    style={{ width: "100%" }}
+                                >
+                                    <Meta title="Europe Street beat" description="www.instagram.com" />
+                                </Card>
+                            </Col>
+                        </Row>
                     </Content>
                 </Layout>
             </DashboardWrapper>
