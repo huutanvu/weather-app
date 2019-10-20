@@ -27,7 +27,12 @@ class Dashboard extends Component {
         }
     }
 
+    onSelectItem = (e) => {
+        this.setState({ currentPath: e.key });
+    }
+
     render = () => {
+        const currentPath = this.state.currentPath;
         return (
             <DashboardWrapper>
                 <Layout className="mainLayout">
@@ -38,7 +43,9 @@ class Dashboard extends Component {
                             </a>
                         </div>
                         <Menu className="mainMenu" mode="horizontal" theme="dark"
-                            selectedKeys={this.state.currentPath || "current"}>
+                            onSelect={this.onSelectItem}
+                            defaultSelectedKeys={['current']}
+                            selectedKeys={currentPath}>
                             <Menu.Item key="current">
                                 <Icon type="thunderbolt" />
                                 <span>Current Weather</span>
