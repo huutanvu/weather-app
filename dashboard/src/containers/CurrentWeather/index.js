@@ -17,11 +17,16 @@ class CurrentWeather extends Component {
         this.props.setLocation({ lon: 8.682127, lat: 50.110924 });
     }
 
+    setUserLocation = () => {
+        this.props.setLocation(this.props.weather.userLocation);
+    }
+
     render = () => {
         return (
             <Fragment>
                 <h1>Current Weather</h1>
                 <button onClick={this.onButtonClick}>Update Location</button>
+                <button onClick={this.setUserLocation} disabled={this.props.weather.userLocation === null}>User your current location</button>
                 <Row gutter={16} style={{ marginTop: 40 }}>
                     <Col span={8}>
                         <WeatherCard />

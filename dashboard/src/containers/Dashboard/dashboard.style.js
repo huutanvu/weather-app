@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const DashboardWrapper = styled.div`
     .mainLayout {
-        max-width: 1200px;
         min-width: 950px;
         height: 100vh;
         margin: 0 auto;
@@ -14,7 +13,6 @@ const DashboardWrapper = styled.div`
     .mainHeader {
         z-index: 1;
         width: 100%;
-        max-width: 1200px;
         position: fixed;
         background: #141a46;
     }
@@ -37,9 +35,10 @@ const DashboardWrapper = styled.div`
     }
 
     .mainContent {
-        padding: 0px 50px;
+        margin: 0 auto;
         margin-top: 64px;
         background: #f0f2f5;
+        max-width: 1200px;
     }
 
     .contentWrapper {

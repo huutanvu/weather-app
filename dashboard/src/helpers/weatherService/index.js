@@ -41,7 +41,12 @@ class WeatherService {
     getForecastWeatherByCoords = async (lon, lat) => {
         const forecastWeatherUrl = `${BACKEND_URL}/forecast`;
         try {
-            let response = await axios.get(forecastWeatherUrl, { params: { lon, lat } });
+            let response = await axios.get(forecastWeatherUrl, {
+                params: {
+                    lon, lat,
+                    timezoneOffset: new Date().getTimezoneOffset()
+                }
+            });
             return response.data;
         }
         catch (err) {
