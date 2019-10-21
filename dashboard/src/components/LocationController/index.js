@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { setLocation, setUserLocation, setLocationByName } from "../../redux/weather/actions";
-import { Button, Select } from "antd";
+import { Button, Select, Icon } from "antd";
 import CountryRegionData from 'country-region-data/data.json';
+
 
 // console.log("Region data:", CountryRegionData)
 
@@ -18,18 +19,11 @@ const { Option } = Select;
 //         }]
 // }
 
-// export class CountryDropdown extends Component {
-
-//     render = () => {
-//         return (
-//             <Select>
-//                 {CountryRegionData.map((v) => {
-//                     <Option value={v.countryName}>{v.countryName}</Option>
-//                 })}
-//             </Select>
-//         )
-//     }
-// }
+const LocationSvg = () => (
+    <svg x="0px" y="0px" viewBox="0 0 128 128" >
+        <path transform="matrix(0.128,0,0,0.128,14,0)" d="M 383 0 C 171 0 0 181 0 403 C 0 696 360 984 375 996 C 380 1000 386 1000 390 996 C 405 984 766 696 766 403 C 766 181 594 0 383 0 z M 383 447 C 293 447 221 374 221 285 C 221 195 293 122 383 122 C 472 122 544 195 544 285 C 544 374 472 447 383 447 z" />
+    </svg>);
+const LocationIcon = props => <Icon component={LocationSvg} {...props} />;
 
 class LocationController extends Component {
 
@@ -104,7 +98,11 @@ class LocationController extends Component {
                     })}
                 </Select>
                 {/* <Button onClick={this.onButtonClick}>Update Location</Button> */}
-                <Button onClick={this.setUserLocation} disabled={this.props.weather.userLocation === null}>Use my location</Button>
+                <Button onClick={this.setUserLocation}
+                    disabled={this.props.weather.userLocation === null}>
+                    <Icon type="compass" />
+                    Use my location
+                </Button>
             </Fragment>
         )
     }
