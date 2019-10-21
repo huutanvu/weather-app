@@ -41,9 +41,10 @@ const chartOptions = {
             left: 30,
             right: 20,
             top: 30,
-            bottom: 0
+            bottom: 40
         }
-    }
+    },
+    maintainAspectRatio: false
 }
 
 const datasetProps = {
@@ -73,10 +74,9 @@ class TemperatureChart extends Component {
                     <Line
                         data={this.props.weather.weatherForecast.chart_data}
                         // width={this.state.appWindow.width}
-                        height={`100%`}
+                        height={200}
+                        width={500}
                         options={chartOptions}
-                    // options={this.addDynamicOptions(options)}
-                    // legend={legend}
                     />
                 </Card>
             </CardWrapper>

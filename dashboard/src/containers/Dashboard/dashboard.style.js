@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const DashboardWrapper = styled.div`
     .mainLayout {
-        min-width: 950px;
         height: 100vh;
         margin: 0 auto;
         font-family: 'Nunito', sans-serif;
@@ -39,6 +38,7 @@ const DashboardWrapper = styled.div`
         margin-top: 64px;
         background: #f0f2f5;
         max-width: 1200px;
+        min-width: 950px;
     }
 
     .contentWrapper {

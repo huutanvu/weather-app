@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { setLocation } from "../../redux/weather/actions";
-import CardWrapper from "../../components/Card/card.style";
-import { Row, Col, Card } from "antd";
+import { Row, Col } from "antd";
 import WeatherCard from "../../components/WeatherCard";
-
-const { Meta } = Card;
+import WeatherForecastCard from "../../components/WeatherForecastCard";
+import TemperatureChart from "../../components/TemperatureChart";
 
 
 class CurrentWeather extends Component {
@@ -32,66 +31,10 @@ class CurrentWeather extends Component {
                         <WeatherCard />
                     </Col>
                     <Col span={16}>
-                        <CardWrapper>
-                            <Card
-                                className="dashboardCard"
-                                style={{ width: "100%" }}
-                            >
-                                <Meta title="Europe Street beat" description="www.instagram.com" />
-                            </Card>
-                        </CardWrapper>
+                        <TemperatureChart />
                     </Col>
                 </Row>
-                <Row gutter={0} style={{ marginTop: 40 }}>
-                    <Col span={4}>
-                        <Card
-                            className="dashboardCard"
-                            style={{ width: "100%" }}
-                        >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
-                    <Col span={4}>
-                        <Card
-                            className="dashboardCard"
-                            style={{ width: "100%" }}
-                        >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
-                    <Col span={4}>
-                        <Card
-                            className="dashboardCard"
-                            style={{ width: "100%" }}
-                        >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
-                    <Col span={4}>
-                        <Card
-                            className="dashboardCard"
-                            style={{ width: "100%" }}
-                        >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
-                    <Col span={4}>
-                        <Card
-                            className="dashboardCard"
-                            style={{ width: "100%" }}
-                        >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
-                    <Col span={4}>
-                        <Card
-                            className="dashboardCard"
-                            style={{ width: "100%" }}
-                        >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
-                </Row>
+                <WeatherForecastCard />
             </Fragment>
         )
     }

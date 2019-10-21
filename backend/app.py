@@ -82,14 +82,14 @@ def create_app():
                 if t < 8:
                     t += 1
                     if date == datetime.datetime.now().date():
-                        chart_labels.append(time.strftime("%H:%M:%S"))
+                        chart_labels.append(time.strftime("%H:%M"))
                     else:
                         if not next_day:
                             next_day = True
                             chart_labels.append(
-                                dt.strftime("%d/%m/%Y %H:%M:%S"))
+                                dt.strftime("%d/%m %H:%M"))
                         else:
-                            chart_labels.append(time.strftime("%H:%M:%S"))
+                            chart_labels.append(time.strftime("%H:%M"))
                     chart_data.append(d["main"]["temp"])
 
                 if date == datetime.datetime.now().date():

@@ -23,13 +23,14 @@ class WeatherCard extends Component {
             icon = weatherConditions[0].icon;
             main = weatherConditions[0].main;
         }
+        const today = new Date();
         return (
             <CardWrapper>
                 <Card
                     className="dashboardCard"
                     style={{ width: "100%" }}
                 >
-                    <Meta title={`${city}, ${country}`} />
+                    <Meta title={`${city}, ${country}`} description={`Today - ${today.toLocaleDateString()}`} />
                     <Row gutter={12} justify="space-around" align="middle" className="weatherInfo">
                         <Col xs={12}>
                             <div className="weatherIcon">

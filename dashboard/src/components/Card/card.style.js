@@ -29,7 +29,6 @@ const CardWrapper = styled.div`
     }
 
     .weatherInfo {
-        padding-top: 10px;
         margin: 0;
         position: relative;
         top: 50%;
