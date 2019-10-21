@@ -52,6 +52,7 @@ def create_app():
         params = {"APPID": WEATHER_API_KEY,
                   "units": "metric"}
         if request.args.get('city') is not None:
+            print("City: ", request.args.get('city'))
             params["q"] = request.args.get('city')
         elif all([request.args.get(coor) is not None for coor in ["lon", "lat"]]):
             params["lon"] = request.args.get('lon')

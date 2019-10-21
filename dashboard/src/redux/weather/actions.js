@@ -14,11 +14,19 @@ const actions = {
  * action creators
  */
 
-export const setUserLocation = (location) => {
+export const setCurrentLocation = (location) => {
     return {
         type: actions.SET_USER_LOCATION,
         userLocation: location
     }
+}
+
+export const setUserLocation = () => {
+    return async (dispatch, getState) => {
+        const currentLocation = await locationService.getCurrentPosition();
+        dispatch(setCurrentLocation({ lon: currentLocation.coords.longitude, lat: currentLocation.coords.latitude }))
+    }
+
 }
 
 export const setWeather = (currentWeather, weatherForecast, location) => {
@@ -41,9 +49,30 @@ export const setLocation = (location) => {
             (weather.lastUpdated !== null && ((currentTimestamp - lastUpdated) > 600))) {
             let currentWeather = await weatherService.getCurrentWeatherByCoords(location.lon, location.lat);
             let weatherForecast = await weatherService.getForecastWeatherByCoords(location.lon, location.lat);
-            let { city, country } = await locationService.getReverseLocation(location);
-            location["city"] = city;
-            location["country"] = country;
+            if (!(location.hasOwnProperty("city") && location.hasOwnProperty("country"))) {
+                let { city, country } = await locationService.getReverseLocation(location);
+                location["city"] = city;
+                location["country"] = country;
+            }
+            dispatch(setWeather(currentWeather, weatherForecast, location))
+        }
+    }
+}
+
+export const setLocationByName = (location) => {
+    return async (dispatch, getState) => {
+        const weather = getState().weather;
+        const currentTimestamp = Math.floor(Date.now() / 1000);  // convert to seconds
+        const lastUpdated = Math.floor(weather.lastUpdated / 1000);  // convert to seconds
+        if (weather.location === null ||
+            weather.location.country !== location.country ||
+            weather.location.city !== location.city ||
+            (weather.lastUpdated !== null && ((currentTimestamp - lastUpdated) > 600))) {
+            let { lon, lat } = await locationService.getLocation(location.city, location.country);
+            let currentWeather = await weatherService.getCurrentWeatherByCoords(lon, lat);
+            let weatherForecast = await weatherService.getForecastWeatherByCoords(lon, lat);
+            location["lon"] = lon;
+            location["lat"] = lat;
             dispatch(setWeather(currentWeather, weatherForecast, location))
         }
     }

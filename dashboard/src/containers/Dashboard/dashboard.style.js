@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const DashboardWrapper = styled.div`
     .mainLayout {
-        height: 100vh;
+        min-height: 100vh;
         margin: 0 auto;
         font-family: 'Nunito', sans-serif;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

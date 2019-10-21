@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import { Card } from "antd";
-import CardWrapper from "../../components/Card/card.style";
+import CardWrapper from "../CardStyle/card.style";
 
 const { Meta } = Card;
 

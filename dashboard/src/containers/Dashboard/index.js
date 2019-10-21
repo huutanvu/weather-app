@@ -19,7 +19,7 @@ class Dashboard extends Component {
 
     componentDidMount = () => {
         locationService.getCurrentPosition().then((data) => {
-            this.props.setUserLocation({ lon: data.coords.longitude, lat: data.coords.latitude });
+            this.props.setUserLocation();
             this.props.setLocation({ lon: data.coords.longitude, lat: data.coords.latitude }).then(() => {
                 this.setState({
                     loading: false

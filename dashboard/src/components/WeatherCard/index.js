@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import CardWrapper from "../Card/card.style";
+import CardWrapper from "../CardStyle/card.style";
 import { Card, Row, Col, Typography } from "antd";
 
 const { Meta } = Card;
