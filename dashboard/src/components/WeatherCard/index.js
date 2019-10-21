@@ -30,7 +30,7 @@ class WeatherCard extends Component {
                     className="dashboardCard"
                     style={{ width: "100%" }}
                 >
-                    <Meta title={`${city}, ${country}`} description={`Today - ${today.toLocaleDateString()}`} />
+                    <Meta title={`${city}, ${country}`} description={`Today ${today.toLocaleDateString()}`} />
                     <Row gutter={12} justify="space-around" align="middle" className="weatherInfo">
                         <Col xs={12}>
                             <div className="weatherIcon">

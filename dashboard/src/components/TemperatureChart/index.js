@@ -27,7 +27,9 @@ const chartOptions = {
                 },
                 display: true,
                 ticks: {
-                    fontSize: 10
+                    fontSize: 10,
+                    beginAtZero: true,
+                    stepSize: 5
                 }
             },
 
@@ -40,8 +42,8 @@ const chartOptions = {
         padding: {
             left: 30,
             right: 20,
-            top: 30,
-            bottom: 40
+            top: 20,
+            bottom: 30
         }
     },
     maintainAspectRatio: false
