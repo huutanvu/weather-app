@@ -19,17 +19,12 @@ const { Option } = Select;
 //         }]
 // }
 
-const LocationSvg = () => (
-    <svg x="0px" y="0px" viewBox="0 0 128 128" >
-        <path transform="matrix(0.128,0,0,0.128,14,0)" d="M 383 0 C 171 0 0 181 0 403 C 0 696 360 984 375 996 C 380 1000 386 1000 390 996 C 405 984 766 696 766 403 C 766 181 594 0 383 0 z M 383 447 C 293 447 221 374 221 285 C 221 195 293 122 383 122 C 472 122 544 195 544 285 C 544 374 472 447 383 447 z" />
-    </svg>);
-const LocationIcon = props => <Icon component={LocationSvg} {...props} />;
 
 class LocationController extends Component {
 
     state = {
-        selectedCountry: null,
-        selectedRegion: null,
+        selectedCountry: "",
+        selectedRegion: "",
         regions: []
     }
     componentDidMount = () => {
@@ -43,6 +38,7 @@ class LocationController extends Component {
         this.props.setUserLocation().then(() => {
             this.props.setLocation(this.props.weather.userLocation);
         })
+        this.setState({ selectedCountry: null, selectedRegion: null, regions: [] })
     }
 
     onChangeCountry = (val) => {
@@ -53,7 +49,7 @@ class LocationController extends Component {
                 break;
             }
         }
-        this.setState({ selectedCountry: val, regions })
+        this.setState({ selectedCountry: val, regions, selectedRegion: null })
     }
 
     onSearchCountry = (val) => {
@@ -80,6 +76,7 @@ class LocationController extends Component {
                     placeholder="Select a country"
                     onChange={this.onChangeCountry}
                     onSearch={this.onSearchCountry}
+                    value={this.state.selectedCountry}
                 >
                     {CountryRegionData.map((v) => {
                         return <Option value={v.countryName} key={v.countryName}>{v.countryName}</Option>
@@ -92,6 +89,7 @@ class LocationController extends Component {
                     placeholder="Select a region"
                     onChange={this.onChangeRegion}
                     onSearch={this.onSearchRegion}
+                    value={this.state.selectedRegion}
                 >
                     {this.state.regions.map((v) => {
                         return <Option value={v} key={v}>{v}</Option>

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setUserLocation, setLocation } from "../../redux/weather/actions";
 import locationService from "../../helpers/locationService";
 
+const CONTINENTS = ['Africa', 'Antarctica', 'Asia', 'Europe', 'Australia', 'North America', 'South America', 'Central America']
 class TripPlanning extends Component {
 
     render = () => {
