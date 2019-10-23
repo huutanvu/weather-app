@@ -195,10 +195,9 @@ def create_app():
                 capitals_temperature, key=lambda x: x[3])
             CONTINENT_CACHE[continent]["last_updated"] = datetime.datetime.now(
             ).timestamp()
-            print(capitals_temperature)
             CONTINENT_CACHE[continent]["data"] = capitals_temperature.copy()
         else:
-            capitals_temperature = CONTINENT_CACHE[continent]["data"]
+            capitals_temperature = CONTINENT_CACHE[continent]["data"].copy()
         final_res = []
         for _range in BASIC_RANGES:
             min_temp_range = _range[0]
