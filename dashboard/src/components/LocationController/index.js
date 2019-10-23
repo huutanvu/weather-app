@@ -23,8 +23,8 @@ const { Option } = Select;
 class LocationController extends Component {
 
     state = {
-        selectedCountry: "",
-        selectedRegion: "",
+        selectedCountry: null,
+        selectedRegion: null,
         regions: []
     }
     componentDidMount = () => {
@@ -76,7 +76,7 @@ class LocationController extends Component {
                     placeholder="Select a country"
                     onChange={this.onChangeCountry}
                     onSearch={this.onSearchCountry}
-                    value={this.state.selectedCountry}
+                    value={this.state.selectedCountry || undefined}
                 >
                     {CountryRegionData.map((v) => {
                         return <Option value={v.countryName} key={v.countryName}>{v.countryName}</Option>
@@ -89,7 +89,7 @@ class LocationController extends Component {
                     placeholder="Select a region"
                     onChange={this.onChangeRegion}
                     onSearch={this.onSearchRegion}
-                    value={this.state.selectedRegion}
+                    value={this.state.selectedRegion || undefined}
                 >
                     {this.state.regions.map((v) => {
                         return <Option value={v} key={v}>{v}</Option>

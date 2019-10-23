@@ -197,35 +197,8 @@ def create_app():
             ).timestamp()
             print(capitals_temperature)
             CONTINENT_CACHE[continent]["data"] = capitals_temperature.copy()
-            print(CONTINENT_CACHE)
         else:
-            print("USE CACHED DATA")
-            print(CONTINENT_CACHE)
             capitals_temperature = CONTINENT_CACHE[continent]["data"]
-        # capitals_temperature = [
-        #     ('Bolivia', 'La Paz', {'lat': '-16.5', 'lon': '-68.150000'}, -2),
-        #     ('Falkland Islands', 'Stanley', {
-        #      'lat': '-51.7', 'lon': '-57.850000'}, 6),
-        #     ('Ecuador', 'Quito', {
-        #      'lat': '-0.21666666666666667', 'lon': '-78.500000'}, 9),
-        #     ('Colombia', 'Bogota', {'lat': '4.6', 'lon': '-74.083333'}, 10),
-        #     ('Argentina', 'Buenos Aires', {
-        #      'lat': '-34.583333333333336', 'lon': '-58.666667'}, 12),
-        #     ('Chile', 'Santiago', {
-        #      'lat': '-33.45', 'lon': '-70.666667'}, 12),
-        #     ('Uruguay', 'Montevideo', {
-        #      'lat': '-34.85', 'lon': '-56.166667'}, 12),
-        #     ('Paraguay', 'Asuncion', {
-        #      'lat': '-25.266666666666666', 'lon': '-57.666667'}, 16),
-        #     ('Peru', 'Lima', {'lat': '-12.05', 'lon': '-77.050000'}, 16),
-        #     ('Venezuela', 'Caracas', {
-        #      'lat': '10.483333333333333', 'lon': '-66.866667'}, 19),
-        #     ('Brazil', 'Brasilia', {
-        #      'lat': '-15.783333333333333', 'lon': '-47.916667'}, 22),
-        #     ('Suriname', 'Paramaribo', {
-        #      'lat': '5.833333333333333', 'lon': '-55.166667'}, 24),
-        #     ('Guyana', 'Georgetown', {'lat': '6.8', 'lon': '-58.150000'}, 24)]
-        # print(sorted(capitals_temperature, key=lambda x: x[3]))
         final_res = []
         for _range in BASIC_RANGES:
             min_temp_range = _range[0]

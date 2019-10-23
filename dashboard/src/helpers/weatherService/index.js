@@ -60,6 +60,18 @@ class WeatherService {
         }
     }
 
+    getCapitalsWeather = async (continent) => {
+        const currentWeatherUrl = `${BACKEND_URL}/capitals`;
+        try {
+            let response = await axios.get(currentWeatherUrl, { params: { continent } });
+            return response.data;
+        }
+        catch (err) {
+            console.error(err);
+            return null;
+        }
+    }
+
 }
 
 
