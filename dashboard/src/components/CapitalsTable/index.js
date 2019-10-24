@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Table } from "antd";
+import { Table, Tabs, Card } from "antd";
 import { connect } from "react-redux";
-import locationService from "../../helpers/locationService";
-import weatherService from "../../helpers/weatherService";
+import CardWrapper from "../CardStyle/card.style";
+
+const { TabPane } = Tabs;
 
 const columns = [
   {
@@ -15,26 +16,45 @@ const columns = [
     dataIndex: 'capital',
     key: 'capital',
   },
+  // {
+  //   title: 'Longitude',
+  //   dataIndex: 'lon',
+  //   key: 'lon',
+  // },
+  // {
+  //   title: 'Lattitude',
+  //   dataIndex: 'lat',
+  //   key: 'lat',
+  // },
   {
-    title: 'Longitude',
-    dataIndex: 'lon',
-    key: 'lon',
-  },
-  {
-    title: 'Lattitude',
-    dataIndex: 'lat',
-    key: 'lat',
-  },
-  {
-    title: 'Temperature',
+    title: 'Temperature (°C)',
     dataIndex: 'temperature',
     key: 'temperature',
   },
 ];
 
 class CapitalsTable extends Component {
+
+  onTabChange = () => {
+
+  }
+
   render = () => {
-    <Table dataSource={dataSource} columns={columns} />;
+    return (
+      <CardWrapper>
+        <Card
+          className="capitalsCard"
+        >
+          <Tabs defaultActiveKey="0" onChange={this.onTabChange}>
+            {this.props.weather.capitalsData.map((data, i) =>
+              <TabPane tab={`${data["min"]}°C - ${data["max"]}°C`} key={i}>
+                <Table dataSource={data["data"]} columns={columns} />
+              </TabPane>
+            )}
+          </Tabs>
+        </Card>
+      </CardWrapper>
+    )
   }
 }
 

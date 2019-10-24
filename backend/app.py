@@ -241,7 +241,7 @@ def create_app():
             while len(res["data"]) < average_length and not checked:
                 if next_res is None:
                     break
-                if next_res["data"][1]["temperture"] - next_res["data"][0]["temperature"] > epsilon:
+                if next_res["data"][1]["temperature"] - next_res["data"][0]["temperature"] > epsilon:
                     res["data"].append(next_res["data"].pop(0))
                 else:
                     break

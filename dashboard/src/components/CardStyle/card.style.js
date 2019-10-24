@@ -75,6 +75,16 @@ const CardWrapper = styled.div`
         font-weight: 700;
         line-height: 18px;
     }
+
+    .capitalsCard {
+        border-radius: 8px;
+        border: none;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        width: 900px;
+    }
+
+    .capitalsCard .ant-card-body {
+    }
 `;
 
 export default CardWrapper;

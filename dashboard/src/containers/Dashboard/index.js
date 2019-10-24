@@ -70,7 +70,7 @@ class Dashboard extends Component {
                                 </Menu.Item>
                                 <Menu.Item key="trip">
                                     <Icon type="clock-circle" />
-                                    <span>Trip Planning</span>
+                                    <span>Capitals Temperature</span>
                                     <Link to="/trip" />
                                 </Menu.Item>
                             </Menu>
