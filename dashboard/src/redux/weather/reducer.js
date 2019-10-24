@@ -5,7 +5,9 @@ const initialState = {
     location: null,
     currentWeather: null,
     weatherForecast: null,
-    lastUpdated: null
+    lastUpdated: null,
+    continent: null,
+    capitalsData: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +22,11 @@ const reducer = (state = initialState, action) => {
                 weatherForecast: action.weatherForecast,
                 location: action.location,
                 lastUpdated: Date.now()
+            })
+        case actions.SET_CAPITALS_DATA:
+            return Object.assign({}, state, {
+                continent: action.continent,
+                capitalsData: action.capitalsData
             })
         default:
             return state;

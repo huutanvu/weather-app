@@ -156,6 +156,7 @@ def create_app():
     @app.route('/capitals', methods=['GET'])
     def get_temperature_capitals():
         global CONTINENT_CACHE
+
         def get_temperature(location):
             current_weather_api = f"{WEATHER_API}/weather"
             params = {"APPID": WEATHER_API_KEY,
@@ -180,34 +181,37 @@ def create_app():
         temp_step = 0
         # Due to the limitation of the free API key, an update will be called once every 10 min
         # Use the cache data instead otherwise
-        if CONTINENT_CACHE[continent]["last_updated"] is None or (datetime.datetime.now().timestamp() - CONTINENT_CACHE[continent]["last_updated"]) >= 600:
-            for capital in CAPITALS_DATA[continent]:
-                temp = get_temperature(capital["location"])
-                if temp is None:
-                    continue
-                if temp < min_temp:
-                    min_temp = math.floor(temp)
-                if temp > max_temp:
-                    max_temp = math.ceil(temp)
-                capitals_temperature.append(
-                    (capital["country"], capital["capital"], capital["location"], round(temp)))
-            capitals_temperature = sorted(
-                capitals_temperature, key=lambda x: x[3])
-            CONTINENT_CACHE[continent]["last_updated"] = datetime.datetime.now(
-            ).timestamp()
-            CONTINENT_CACHE[continent]["data"] = capitals_temperature.copy()
-        else:
-            capitals_temperature = CONTINENT_CACHE[continent]["data"].copy()
-        final_res = []
-        for _range in BASIC_RANGES:
-            min_temp_range = _range[0]
-            max_temp_range = _range[1]
-            temp = []
-            while len(capitals_temperature) > 0 and min_temp_range <= capitals_temperature[0][3] <= max_temp_range:
-                temp.append(capitals_temperature.pop(0))
-            if len(temp) > 0:
-                final_res.append(
-                    {"min": min_temp_range, "max": max_temp_range, "data": temp})
+        # if CONTINENT_CACHE[continent]["last_updated"] is None or (datetime.datetime.now().timestamp() - CONTINENT_CACHE[continent]["last_updated"]) >= 600:
+        #     for capital in CAPITALS_DATA[continent]:
+        #         temp = get_temperature(capital["location"])
+        #         if temp is None:
+        #             continue
+        #         if temp < min_temp:
+        #             min_temp = math.floor(temp)
+        #         if temp > max_temp:
+        #             max_temp = math.ceil(temp)
+        #         capitals_temperature.append(
+        #             {"country": capital["country"], "capital": capital["capital"], "lat": capital["location"]["lat"],
+        #              "lon": capital["location"]["lon"], "temperature": round(temp)})
+        #     capitals_temperature = sorted(
+        #         capitals_temperature, key=lambda x: x["temperature"])
+        #     CONTINENT_CACHE[continent]["last_updated"] = datetime.datetime.now(
+        #     ).timestamp()
+        #     CONTINENT_CACHE[continent]["data"] = capitals_temperature.copy()
+        # else:
+        #     capitals_temperature = CONTINENT_CACHE[continent]["data"].copy()
+        # final_res = []
+        # for _range in BASIC_RANGES:
+        #     min_temp_range = _range[0]
+        #     max_temp_range = _range[1]
+        #     temp = []
+        #     while len(capitals_temperature) > 0 and min_temp_range <= capitals_temperature[0]["temperature"] <= max_temp_range:
+        #         temp.append(capitals_temperature.pop(0))
+        #     if len(temp) > 0:
+        #         final_res.append(
+        #             {"min": min_temp_range, "max": max_temp_range, "data": temp})
+        final_res = [{'min': 1, 'max': 10,
+                      'data': [{'country': 'Bolivia', 'capital': 'La Paz', 'lat': '-16.5', 'lon': '-68.150000', 'temperature': 3}, {'country': 'Falkland Islands', 'capital': 'Stanley', 'lat': '-51.7', 'lon': '-57.850000', 'temperature': 6}, {'country': 'Argentina', 'capital': 'Buenos Aires', 'lat': '-34.583333333333336', 'lon': '-58.666667', 'temperature': 10}, {'country': 'Ecuador', 'capital': 'Quito', 'lat': '-0.21666666666666667', 'lon': '-78.500000', 'temperature': 10}]}, {'min': 11, 'max': 20, 'data': [{'country': 'Chile', 'capital': 'Santiago', 'lat': '-33.45', 'lon': '-70.666667', 'temperature': 12}, {'country': 'Colombia', 'capital': 'Bogota', 'lat': '4.6', 'lon': '-74.083333', 'temperature': 12}, {'country': 'Uruguay', 'capital': 'Montevideo', 'lat': '-34.85', 'lon': '-56.166667', 'temperature': 13}, {'country': 'Peru', 'capital': 'Lima', 'lat': '-12.05', 'lon': '-77.050000', 'temperature': 16}, {'country': 'Paraguay', 'capital': 'Asuncion', 'lat': '-25.266666666666666', 'lon': '-57.666667', 'temperature': 17}, {'country': 'Brazil', 'capital': 'Brasilia', 'lat': '-15.783333333333333', 'lon': '-47.916667', 'temperature': 18}]}, {'min': 21, 'max': 30, 'data': [{'country': 'Venezuela', 'capital': 'Caracas', 'lat': '10.483333333333333', 'lon': '-66.866667', 'temperature': 23}, {'country': 'Guyana', 'capital': 'Georgetown', 'lat': '6.8', 'lon': '-58.150000', 'temperature': 24}, {'country': 'Suriname', 'capital': 'Paramaribo', 'lat': '5.833333333333333', 'lon': '-55.166667', 'temperature': 24}]}]
         average_length = math.floor(
             sum([len(i["data"]) for i in final_res]) / len(final_res))
         epsilon = 1
@@ -225,25 +229,26 @@ def create_app():
                 _longer = res["data"][average_length:].copy()
                 res["data"] = res["data"][:average_length].copy()
                 checked = True
-                while _longer[0][3] - res["data"][-1][3] < epsilon:
+                while len(_longer) > 0 and _longer[0]["temperature"] - res["data"][-1]["temperature"] < epsilon:
                     res["data"].append(_longer.pop(0))
-                if next_res is None:
-                    next_res = {}
-                    next_res["data"] = _longer
-                    next_res["max"] = _longer[-1][3]
-                    next_res["min"] = _longer[0][3]
-                    final_res.append(next_res)
-                else:
-                    next_res["data"] = _longer + next_res["data"]
+                if len(_longer) > 0:
+                    if next_res is None:
+                        next_res = {}
+                        next_res["data"] = _longer
+                        next_res["max"] = _longer[-1]["temperature"]
+                        next_res["min"] = _longer[0]["temperature"]
+                        final_res.append(next_res)
+                    else:
+                        next_res["data"] = _longer + next_res["data"]
             while len(res["data"]) < average_length and not checked:
                 if next_res is None:
                     break
-                if next_res["data"][1][3] - next_res["data"][0][3] > epsilon:
+                if next_res["data"][1]["temperture"] - next_res["data"][0]["temperature"] > epsilon:
                     res["data"].append(next_res["data"].pop(0))
                 else:
                     break
-            res["max"] = res["data"][-1][3]
-            res["min"] = res["data"][0][3]
+            res["max"] = res["data"][-1]["temperature"]
+            res["min"] = res["data"][0]["temperature"]
 
         return jsonify(final_res)
 

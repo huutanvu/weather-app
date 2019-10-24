@@ -7,7 +7,8 @@ import locationService from "../../helpers/locationService";
 
 const actions = {
     SET_WEATHER: 'SET_WEATHER',
-    SET_USER_LOCATION: 'SET_USER_LOCATION'
+    SET_USER_LOCATION: 'SET_USER_LOCATION',
+    SET_CAPITALS_DATA: 'SET_CAPITALS_DATA'
 };
 
 /*
@@ -21,14 +22,6 @@ export const setCurrentLocation = (location) => {
     }
 }
 
-export const setUserLocation = () => {
-    return async (dispatch, getState) => {
-        const currentLocation = await locationService.getCurrentPosition();
-        dispatch(setCurrentLocation({ lon: currentLocation.coords.longitude, lat: currentLocation.coords.latitude }))
-    }
-
-}
-
 export const setWeather = (currentWeather, weatherForecast, location) => {
     return {
         type: actions.SET_WEATHER,
@@ -36,6 +29,22 @@ export const setWeather = (currentWeather, weatherForecast, location) => {
         weatherForecast,
         location
     }
+}
+
+export const setCapitalsData = (continent, capitalsData) => {
+    return {
+        type: actions.SET_CAPITALS_DATA,
+        continent,
+        capitalsData
+    }
+}
+
+export const setUserLocation = () => {
+    return async (dispatch, getState) => {
+        const currentLocation = await locationService.getCurrentPosition();
+        dispatch(setCurrentLocation({ lon: currentLocation.coords.longitude, lat: currentLocation.coords.latitude }))
+    }
+
 }
 
 export const setLocation = (location) => {
@@ -73,7 +82,17 @@ export const setLocationByName = (location) => {
             let weatherForecast = await weatherService.getForecastWeatherByCoords(lon, lat);
             location["lon"] = lon;
             location["lat"] = lat;
-            dispatch(setWeather(currentWeather, weatherForecast, location))
+            dispatch(setWeather(currentWeather, weatherForecast, location));
+        }
+    }
+}
+
+export const getCapitalsData = (continent) => {
+    return async (dispatch, getState) => {
+        const weather = getState().weather;
+        if (weather.continent !== continent) {
+            let capitalsData = await weatherService.getCapitalsWeather(continent);
+            dispatch(setCapitalsData(continent, capitalsData));
         }
     }
 }
